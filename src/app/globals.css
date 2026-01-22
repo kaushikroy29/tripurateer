@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-saffron: #FF9933;
+  --color-india-green: #138808;
+  --color-navy: #000080;
+}
+
+:root {
+  --background: #fdfbf7;
+  /* Slight warm off-white */
+  --foreground: #171717;
+}
+
+/* Simple reset */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Custom Gradients */
+.bg-gradient-saffron {
+  background: linear-gradient(135deg, #FF9933 0%, #FF7722 100%);
+}
+
+.bg-gradient-green {
+  background: linear-gradient(135deg, #138808 0%, #0e6b05 100%);
+}
+
+.bg-gradient-navy {
+  background: linear-gradient(135deg, #000080 0%, #00004d 100%);
+}
