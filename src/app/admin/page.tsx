@@ -1,18 +1,15 @@
 'use client';
 
 import { updateResult, updateSettings } from '../actions';
-import { getSiteSettings } from '@/lib/storage'; // Note: Client components shouldn't import this directly if it was real DB
-import { useState, useEffect } from 'react';
-
-// NOTE: In a real app we'd pass initial data as props or use a separate server component wrapper
-// For this mock simplified setup, we'll fetch on mount or just rely on defaults for now
-// To do it properly with App Router:
-// We should make the page async server component that passes data to a client component form
+import { logout } from '@/lib/auth';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
     const today = new Date().toISOString().split('T')[0];
     const [message, setMessage] = useState('');
     const [settingsTab, setSettingsTab] = useState(false);
+    const router = useRouter();
 
     async function handleResultUpdate(formData: FormData) {
         const res = await updateResult(formData);
@@ -30,10 +27,24 @@ export default function AdminPage() {
         }
     }
 
+    async function handleLogout() {
+        await logout();
+        router.push('/admin/login');
+        router.refresh();
+    }
+
     return (
         <main className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">
             <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg border-2 border-black">
-                <h1 className="text-2xl font-bold mb-6 text-center uppercase">Admin Panel</h1>
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-2xl font-bold uppercase">Admin Panel</h1>
+                    <button
+                        onClick={handleLogout}
+                        className="text-red-600 hover:text-red-800 font-bold text-sm underline"
+                    >
+                        Logout
+                    </button>
+                </div>
 
                 <div className="flex mb-6 border-b border-gray-200">
                     <button
