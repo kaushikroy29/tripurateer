@@ -1,65 +1,101 @@
+import { supabase } from './supabase';
 import { LotteryResult, CreateResultInput } from './types';
-
-// In-memory store for development
-let mockResults: LotteryResult[] = [
-    {
-        id: '1',
-        date: new Date().toISOString().split('T')[0], // Today
-        round1: '',
-        round2: '',
-    },
-    {
-        id: '2',
-        date: new Date(Date.now() - 86400000).toISOString().split('T')[0], // Yesterday
-        round1: '45',
-        round2: '89',
-    }
-];
 
 export interface SiteSettings {
     noticeText: string;
     youtubeVideoId: string;
 }
 
-let mockSettings: SiteSettings = {
+const defaultSettings: SiteSettings = {
     noticeText: 'Welcome to TripuraTeer.com! Results are updated daily. Stay tuned for live updates.',
     youtubeVideoId: 'jfKfPfyJRdk'
 };
 
 export async function getResultByDate(date: string): Promise<LotteryResult | null> {
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    return mockResults.find((r) => r.date === date) || null;
+    const { data, error } = await supabase
+        .from('results')
+        .select('*')
+        .eq('date', date)
+        .single();
+
+    if (error || !data) return null;
+    return data as LotteryResult;
 }
 
 export async function getPreviousResults(beforeDate: string): Promise<LotteryResult[]> {
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    return mockResults
-        .filter((r) => r.date < beforeDate)
-        .sort((a, b) => b.date.localeCompare(a.date));
+    const { data, error } = await supabase
+        .from('results')
+        .select('*')
+        .lt('date', beforeDate)
+        .order('date', { ascending: false })
+        .limit(30);
+
+    if (error || !data) return [];
+    return data as LotteryResult[];
 }
 
 export async function saveResult(data: CreateResultInput): Promise<LotteryResult> {
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    // Check if result exists for this date
+    const existing = await getResultByDate(data.date);
 
-    const existingIndex = mockResults.findIndex((r) => r.date === data.date);
-    if (existingIndex >= 0) {
-        mockResults[existingIndex] = { ...mockResults[existingIndex], ...data };
-        return mockResults[existingIndex];
+    if (existing) {
+        // Update existing
+        const { data: updated, error } = await supabase
+            .from('results')
+            .update({ round1: data.round1, round2: data.round2 })
+            .eq('date', data.date)
+            .select()
+            .single();
+
+        if (error) throw error;
+        return updated as LotteryResult;
     } else {
-        const newResult = { ...data, id: Math.random().toString(36).substring(7) };
-        mockResults.push(newResult);
-        return newResult;
+        // Insert new
+        const { data: inserted, error } = await supabase
+            .from('results')
+            .insert({
+                date: data.date,
+                round1: data.round1,
+                round2: data.round2
+            })
+            .select()
+            .single();
+
+        if (error) throw error;
+        return inserted as LotteryResult;
     }
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    return mockSettings;
+    const { data, error } = await supabase
+        .from('settings')
+        .select('*')
+        .eq('id', 1)
+        .single();
+
+    if (error || !data) return defaultSettings;
+
+    return {
+        noticeText: data.notice_text || defaultSettings.noticeText,
+        youtubeVideoId: data.youtube_video_id || defaultSettings.youtubeVideoId
+    };
 }
 
 export async function updateSiteSettings(settings: Partial<SiteSettings>): Promise<SiteSettings> {
-    await new Promise((resolve) => setTimeout(resolve, 50));
-    mockSettings = { ...mockSettings, ...settings };
-    return mockSettings;
+    const current = await getSiteSettings();
+    const updated = { ...current, ...settings };
+
+    const { error } = await supabase
+        .from('settings')
+        .upsert({
+            id: 1,
+            notice_text: updated.noticeText,
+            youtube_video_id: updated.youtubeVideoId
+        });
+
+    if (error) {
+        console.error('Supabase error:', error);
+    }
+
+    return updated;
 }
