@@ -42,7 +42,12 @@ export async function saveResult(data: CreateResultInput): Promise<LotteryResult
         // Update existing
         const { data: updated, error } = await supabase
             .from('results')
-            .update({ round1: data.round1, round2: data.round2 })
+            .update({
+                round1: data.round1,
+                round2: data.round2,
+                night_round1: data.night_round1,
+                night_round2: data.night_round2
+            })
             .eq('date', data.date)
             .select()
             .single();
@@ -56,7 +61,9 @@ export async function saveResult(data: CreateResultInput): Promise<LotteryResult
             .insert({
                 date: data.date,
                 round1: data.round1,
-                round2: data.round2
+                round2: data.round2,
+                night_round1: data.night_round1,
+                night_round2: data.night_round2
             })
             .select()
             .single();

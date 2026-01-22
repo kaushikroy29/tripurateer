@@ -62,7 +62,7 @@ export default function AdminPage() {
                 </div>
 
                 {!settingsTab ? (
-                    <form action={handleResultUpdate} className="flex flex-col gap-4">
+                    <form action={handleResultUpdate} className="flex flex-col gap-6">
                         <div>
                             <label className="block font-bold mb-1">Date</label>
                             <input
@@ -74,34 +74,69 @@ export default function AdminPage() {
                             />
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label className="block font-bold mb-1 text-red-600">Round 1</label>
-                                <input
-                                    name="round1"
-                                    type="text"
-                                    placeholder="XX"
-                                    maxLength={2}
-                                    className="w-full border-2 border-gray-300 p-2 rounded text-center text-xl font-black"
-                                />
+                        {/* Day Teer Section */}
+                        <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
+                            <h3 className="font-bold text-lg mb-3 text-orange-800 uppercase flex items-center gap-2">
+                                ☀️ Day Teer <span className="text-xs bg-orange-200 px-2 py-0.5 rounded text-orange-800">3:45 PM / 4:45 PM</span>
+                            </h3>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block font-bold mb-1 text-gray-700 text-sm">Round 1</label>
+                                    <input
+                                        name="round1"
+                                        type="text"
+                                        placeholder="XX"
+                                        maxLength={2}
+                                        className="w-full border-2 border-gray-300 p-2 rounded text-center text-xl font-black focus:border-orange-500 outline-none"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block font-bold mb-1 text-gray-700 text-sm">Round 2</label>
+                                    <input
+                                        name="round2"
+                                        type="text"
+                                        placeholder="XX"
+                                        maxLength={2}
+                                        className="w-full border-2 border-gray-300 p-2 rounded text-center text-xl font-black focus:border-orange-500 outline-none"
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <label className="block font-bold mb-1 text-blue-600">Round 2</label>
-                                <input
-                                    name="round2"
-                                    type="text"
-                                    placeholder="XX"
-                                    maxLength={2}
-                                    className="w-full border-2 border-gray-300 p-2 rounded text-center text-xl font-black"
-                                />
+                        </div>
+
+                        {/* Night Teer Section */}
+                        <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
+                            <h3 className="font-bold text-lg mb-3 text-indigo-900 uppercase flex items-center gap-2">
+                                🌙 Night Teer <span className="text-xs bg-indigo-200 px-2 py-0.5 rounded text-indigo-800">9:10 PM / 10:10 PM</span>
+                            </h3>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block font-bold mb-1 text-gray-700 text-sm">Round 1</label>
+                                    <input
+                                        name="nightRound1"
+                                        type="text"
+                                        placeholder="XX"
+                                        maxLength={2}
+                                        className="w-full border-2 border-gray-300 p-2 rounded text-center text-xl font-black focus:border-indigo-500 outline-none"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block font-bold mb-1 text-gray-700 text-sm">Round 2</label>
+                                    <input
+                                        name="nightRound2"
+                                        type="text"
+                                        placeholder="XX"
+                                        maxLength={2}
+                                        className="w-full border-2 border-gray-300 p-2 rounded text-center text-xl font-black focus:border-indigo-500 outline-none"
+                                    />
+                                </div>
                             </div>
                         </div>
 
                         <button
                             type="submit"
-                            className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded text-lg transition-colors"
+                            className="mt-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg text-lg transition-colors shadow-md"
                         >
-                            Save Result
+                            Save Results
                         </button>
                     </form>
                 ) : (

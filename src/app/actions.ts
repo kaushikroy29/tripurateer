@@ -8,6 +8,8 @@ export async function updateResult(formData: FormData) {
     const date = formData.get('date') as string;
     const round1 = formData.get('round1') as string;
     const round2 = formData.get('round2') as string;
+    const nightRound1 = formData.get('nightRound1') as string;
+    const nightRound2 = formData.get('nightRound2') as string;
 
     if (!date) return { error: 'Date is required' };
 
@@ -15,6 +17,8 @@ export async function updateResult(formData: FormData) {
         date,
         round1: round1 || '',
         round2: round2 || '',
+        night_round1: nightRound1 || '',
+        night_round2: nightRound2 || '',
     });
 
     revalidatePath('/');

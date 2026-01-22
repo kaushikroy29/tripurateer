@@ -45,39 +45,74 @@ export default async function Home() {
       {/* Main Grid: Results + Live Stream */}
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
         {/* Today's Result Card */}
-        <div className="bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all hover:scale-[1.01] border-t-4 border-[var(--color-saffron)]">
-          <h2 className="text-2xl md:text-3xl font-black text-center py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md tracking-wide">
-            🎯 TODAY'S RESULT
-          </h2>
+        <div className="flex flex-col gap-6">
+          {/* Day Teer */}
+          <div className="bg-white shadow-xl rounded-2xl overflow-hidden transform transition-all hover:scale-[1.01] border-t-4 border-[var(--color-saffron)]">
+            <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md tracking-wide flex flex-col">
+              <span>☀️ DAY TEER RESULTS</span>
+            </h2>
 
-          <div className="p-4">
-            <table className="w-full text-center text-lg font-bold">
-              <thead>
-                <tr className="bg-orange-50">
-                  <th className="p-3 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-sm">Target</th>
-                  <th className="p-3 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-sm">FR (First)</th>
-                  <th className="p-3 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-sm">SR (Second)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="p-4 text-gray-500 font-extrabold bg-gray-50">Result</td>
-                  <td className="p-4 text-4xl md:text-5xl text-[var(--color-saffron)] font-black drop-shadow-sm">
-                    {result?.round1 || 'XX'}
-                  </td>
-                  <td className="p-4 text-4xl md:text-5xl text-[var(--color-india-green)] font-black drop-shadow-sm">
-                    {result?.round2 || 'XX'}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="p-4">
+              <table className="w-full text-center text-lg font-bold">
+                <thead>
+                  <tr className="bg-orange-50">
+                    <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-xs">Target</th>
+                    <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-xs">
+                      FR <span className="block text-[10px] text-gray-500">3:45 PM</span>
+                    </th>
+                    <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-xs">
+                      SR <span className="block text-[10px] text-gray-500">4:45 PM</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 text-gray-500 font-extrabold bg-gray-50 text-sm">Result</td>
+                    <td className="p-3 text-3xl md:text-4xl text-[var(--color-saffron)] font-black drop-shadow-sm">
+                      {result?.round1 || 'XX'}
+                    </td>
+                    <td className="p-3 text-3xl md:text-4xl text-[var(--color-india-green)] font-black drop-shadow-sm">
+                      {result?.round2 || 'XX'}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          {!result?.round1 && !result?.round2 && (
-            <p className="text-center pb-4 text-gray-400 font-semibold animate-pulse text-sm">
-              ⏳ Waiting for update...
-            </p>
-          )}
+          {/* Night Teer */}
+          <div className="bg-white shadow-xl rounded-2xl overflow-hidden transform transition-all hover:scale-[1.01] border-t-4 border-indigo-600">
+            <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-indigo-800 to-indigo-600 text-white shadow-md tracking-wide flex flex-col">
+              <span>🌙 NIGHT TEER RESULTS</span>
+            </h2>
+
+            <div className="p-4">
+              <table className="w-full text-center text-lg font-bold">
+                <thead>
+                  <tr className="bg-indigo-50">
+                    <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-indigo-200 text-xs">Target</th>
+                    <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-indigo-200 text-xs">
+                      FR <span className="block text-[10px] text-gray-500">9:10 PM</span>
+                    </th>
+                    <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-indigo-200 text-xs">
+                      SR <span className="block text-[10px] text-gray-500">10:10 PM</span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="p-3 text-gray-500 font-extrabold bg-gray-50 text-sm">Result</td>
+                    <td className="p-3 text-3xl md:text-4xl text-indigo-600 font-black drop-shadow-sm">
+                      {result?.night_round1 || 'XX'}
+                    </td>
+                    <td className="p-3 text-3xl md:text-4xl text-purple-600 font-black drop-shadow-sm">
+                      {result?.night_round2 || 'XX'}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
         {/* Live YouTube Section */}
