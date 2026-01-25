@@ -16,23 +16,27 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center py-8 px-4 font-sans relative" style={{
-      background: 'linear-gradient(180deg, #FF9933 0%, #FF9933 20%, #FFFFFF 20%, #FFFFFF 50%, #138808 50%, #138808 100%)',
+      background: 'linear-gradient(135deg, #FF9933 0%, #FF9933 25%, #FFFFFF 25%, #FFFFFF 65%, #138808 65%, #138808 100%)',
+      backgroundAttachment: 'fixed',
     }}>
       {/* Overlay for readability */}
       <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
 
       {/* Content wrapper */}
       <div className="relative z-10 flex flex-col items-center w-full">
-        {/* Header with Flag */}
+        {/* Header with Logo */}
         <header className="flex flex-col items-center mb-6 w-full">
-          <div className="flex items-center gap-4 mb-2">
-            <IndianFlag className="w-14 h-9 shadow-md rounded-sm" />
-            <h1 className="text-4xl md:text-6xl font-black text-[var(--color-navy)] uppercase tracking-tighter drop-shadow-sm">
-              Tripura Teer
-            </h1>
-            <IndianFlag className="w-14 h-9 shadow-md rounded-sm hidden md:block" />
+          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4 transform hover:scale-105 transition-transform duration-300">
+            <img
+              src="/logo.jpg"
+              alt="Tripura Teer Logo"
+              className="w-full h-full object-contain drop-shadow-2xl rounded-full border-4 border-white"
+            />
           </div>
-          <div className="h-1.5 w-48 bg-gradient-to-r from-[var(--color-saffron)] via-white to-[var(--color-india-green)] rounded-full shadow-sm"></div>
+          <h1 className="text-4xl md:text-6xl font-black text-[var(--color-navy)] uppercase tracking-tighter drop-shadow-sm text-center">
+            Tripura Teer
+          </h1>
+          <div className="h-1.5 w-48 bg-gradient-to-r from-[var(--color-saffron)] via-white to-[var(--color-india-green)] rounded-full shadow-sm mt-4"></div>
         </header>
 
         <p className="text-lg md:text-xl font-bold text-gray-600 mb-6 bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full shadow-sm border border-gray-100">
