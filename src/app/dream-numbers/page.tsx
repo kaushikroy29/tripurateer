@@ -17,7 +17,7 @@ export default function DreamNumbersPage() {
                 <h1 className="text-3xl md:text-5xl font-black text-[var(--color-navy)] mb-2 uppercase text-center drop-shadow-sm flex items-center justify-center gap-3">
                     <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto invert" />
                     Dream Numbers
-                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto scale-x-[-1] invert" />
+                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto invert" style={{ transform: 'scaleX(-1)' }} />
                 </h1>
                 <div className="h-1 w-24 bg-gradient-to-r from-[var(--color-saffron)] to-[var(--color-india-green)] rounded-full"></div>
             </header>
