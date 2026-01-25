@@ -19,8 +19,7 @@ export default async function Home() {
       background: 'linear-gradient(135deg, #D44800 0%, #D44800 25%, #F0F0F0 25%, #F0F0F0 65%, #004225 65%, #004225 100%)',
       backgroundAttachment: 'fixed',
     }}>
-      {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-white/75 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
 
       {/* Content wrapper */}
       <div className="relative z-10 flex flex-col items-center w-full">
