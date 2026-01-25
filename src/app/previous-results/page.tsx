@@ -22,9 +22,11 @@ export default async function PreviousResults() {
                 <table className="w-full border-collapse text-center text-xl font-bold">
                     <thead className="bg-[var(--color-navy)] text-white">
                         <tr>
-                            <th className="p-4 uppercase tracking-wider border-b-4 border-orange-500 w-1/3">Date</th>
-                            <th className="p-4 uppercase tracking-wider border-b-4 border-white w-1/3">First</th>
-                            <th className="p-4 uppercase tracking-wider border-b-4 border-green-500 w-1/3">Second</th>
+                            <th className="p-4 uppercase tracking-wider border-b-4 border-orange-500">Date</th>
+                            <th className="p-4 uppercase tracking-wider border-b-4 border-white bg-orange-50 text-[var(--color-navy)]">Day F/R</th>
+                            <th className="p-4 uppercase tracking-wider border-b-4 border-white bg-orange-50 text-[var(--color-navy)]">Day S/R</th>
+                            <th className="p-4 uppercase tracking-wider border-b-4 border-indigo-300 bg-indigo-50 text-[var(--color-navy)]">Night F/R</th>
+                            <th className="p-4 uppercase tracking-wider border-b-4 border-indigo-300 bg-indigo-50 text-[var(--color-navy)]">Night S/R</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,14 +37,16 @@ export default async function PreviousResults() {
                                         day: 'numeric', month: 'short', year: 'numeric'
                                     })}
                                 </td>
-                                <td className="p-4 text-red-600 font-black border-b border-gray-200 border-l border-r">{item.round1}</td>
-                                <td className="p-4 text-green-700 font-black border-b border-gray-200">{item.round2}</td>
+                                <td className="p-4 text-red-600 font-black border-b border-gray-200 bg-orange-50/30">{item.round1}</td>
+                                <td className="p-4 text-green-700 font-black border-b border-gray-200 border-r border-gray-300 bg-orange-50/30">{item.round2}</td>
+                                <td className="p-4 text-indigo-600 font-black border-b border-gray-200 bg-indigo-50/30">{item.night_round1 || '-'}</td>
+                                <td className="p-4 text-purple-600 font-black border-b border-gray-200 bg-indigo-50/30">{item.night_round2 || '-'}</td>
                             </tr>
                         ))}
 
                         {history.length === 0 && (
                             <tr>
-                                <td colSpan={3} className="p-8 text-center text-gray-400 font-medium">
+                                <td colSpan={5} className="p-8 text-center text-gray-400 font-medium">
                                     No previous results found.
                                 </td>
                             </tr>
