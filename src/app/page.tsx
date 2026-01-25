@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center py-8 px-4 font-sans relative" style={{
-      background: 'linear-gradient(135deg, #FF9933 0%, #FF9933 25%, #FFFFFF 25%, #FFFFFF 65%, #138808 65%, #138808 100%)',
+      background: 'linear-gradient(135deg, #FF671F 0%, #FF671F 25%, #FFFFFF 25%, #FFFFFF 65%, #046A38 65%, #046A38 100%)',
       backgroundAttachment: 'fixed',
     }}>
       {/* Overlay for readability */}
