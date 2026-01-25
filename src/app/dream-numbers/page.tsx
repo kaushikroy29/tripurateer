@@ -14,8 +14,10 @@ export default function DreamNumbersPage() {
     return (
         <main className="min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4 font-sans">
             <header className="flex flex-col items-center mb-6 w-full">
-                <h1 className="text-3xl md:text-5xl font-black text-[var(--color-navy)] mb-2 uppercase text-center drop-shadow-sm">
+                <h1 className="text-3xl md:text-5xl font-black text-[var(--color-navy)] mb-2 uppercase text-center drop-shadow-sm flex items-center justify-center gap-3">
+                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto invert" />
                     Dream Numbers
+                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto scale-x-[-1] invert" />
                 </h1>
                 <div className="h-1 w-24 bg-gradient-to-r from-[var(--color-saffron)] to-[var(--color-india-green)] rounded-full"></div>
             </header>

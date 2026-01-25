@@ -1,6 +1,6 @@
 import { getResultByDate, getSiteSettings, getPreviousResults } from '@/lib/storage';
 import Link from 'next/link';
-import IndianFlag from '@/components/IndianFlag';
+
 
 export const revalidate = 0;
 
@@ -27,7 +27,7 @@ export default async function Home() {
         <header className="flex flex-col items-center mb-6 w-full">
           <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4 transform hover:scale-105 transition-transform duration-300">
             <img
-              src="/logo.jpg"
+              src="/logo.png"
               alt="Tripura Teer Logo"
               className="w-full h-full object-contain drop-shadow-2xl rounded-full border-4 border-white"
             />
@@ -125,7 +125,10 @@ export default async function Home() {
         {/* Previous Results Section */}
         <div className="w-full max-w-4xl bg-white shadow-xl rounded-2xl overflow-hidden border-t-4 border-blue-500 mb-8">
           <div className="flex justify-between items-center bg-gradient-to-r from-blue-600 to-blue-500 text-white p-4">
-            <h2 className="text-xl md:text-2xl font-black uppercase">📜 Previous Results</h2>
+            <h2 className="text-xl md:text-2xl font-black uppercase flex items-center gap-2">
+              <img src="/teer-icon.png" alt="Decoration" className="h-8 w-auto" />
+              Previous Results
+            </h2>
             <Link href="/previous-results" className="text-sm hover:underline">View All →</Link>
           </div>
           <div className="overflow-x-auto">
