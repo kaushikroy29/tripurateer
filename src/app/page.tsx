@@ -16,11 +16,11 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen flex flex-col items-center py-8 px-4 font-sans relative" style={{
-      background: 'linear-gradient(135deg, #FF671F 0%, #FF671F 25%, #FFFFFF 25%, #FFFFFF 65%, #046A38 65%, #046A38 100%)',
+      background: 'linear-gradient(135deg, #D44800 0%, #D44800 25%, #F0F0F0 25%, #F0F0F0 65%, #004225 65%, #004225 100%)',
       backgroundAttachment: 'fixed',
     }}>
       {/* Overlay for readability */}
-      <div className="absolute inset-0 bg-white/85 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-white/75 backdrop-blur-sm"></div>
 
       {/* Content wrapper */}
       <div className="relative z-10 flex flex-col items-center w-full">
