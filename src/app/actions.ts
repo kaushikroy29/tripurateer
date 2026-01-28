@@ -13,13 +13,18 @@ export async function updateResult(formData: FormData) {
 
     if (!date) return { error: 'Date is required' };
 
-    await saveResult({
-        date,
-        round1: round1 || '',
-        round2: round2 || '',
-        night_round1: nightRound1 || '',
-        night_round2: nightRound2 || '',
-    });
+    try {
+        await saveResult({
+            date,
+            round1: round1 || '',
+            round2: round2 || '',
+            night_round1: nightRound1 || '',
+            night_round2: nightRound2 || '',
+        });
+    } catch (e) {
+        console.error('Failed to update result:', e);
+        return { error: 'Failed to update result' };
+    }
 
     revalidatePath('/');
     revalidatePath('/previous-results');
