@@ -120,14 +120,21 @@ export default async function Home() {
         </div>
 
         {/* Previous Results Section */}
-        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-blue-500 mb-8">
-          <div className="flex justify-between items-center bg-gradient-to-r from-blue-700 to-blue-500 text-white p-4">
-            <h2 className="text-xl md:text-2xl font-black uppercase flex items-center gap-2">
-              <img src="/teer-icon.png" alt="Decoration" className="h-8 w-auto" />
-              Previous Results
-            </h2>
-            <Link href="/previous-results" className="text-sm hover:underline font-bold">View All →</Link>
-          </div>
+        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-blue-500 mb-8 transition-transform hover:scale-[1.01]">
+          <Link href="/previous-results" className="block w-full cursor-pointer group">
+            <div className="w-full relative overflow-hidden">
+              <img
+                src="/previous-res-banner.png"
+                alt="Previous Results Banner"
+                className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-blue-50/80 backdrop-blur-sm border-t border-blue-100">
+              <span className="text-blue-800 font-bold uppercase text-sm tracking-wider pl-2">Tap to view history</span>
+              <span className="text-sm font-black text-blue-700 pr-2">View All →</span>
+            </div>
+          </Link>
           <div className="overflow-x-auto">
             <table className="w-full text-center text-lg font-bold">
               <thead className="bg-[#000033] text-white">
@@ -153,11 +160,21 @@ export default async function Home() {
         </div>
 
         {/* Dream Numbers Section */}
-        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-orange-500 mb-8">
-          <div className="flex justify-between items-center bg-gradient-to-r from-orange-600 to-orange-400 text-white p-4">
-            <h2 className="text-xl md:text-2xl font-black uppercase">💭 Dream Numbers</h2>
-            <Link href="/dream-numbers" className="text-sm hover:underline font-bold">View All →</Link>
-          </div>
+        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-orange-500 mb-8 transition-transform hover:scale-[1.01]">
+          <Link href="/dream-numbers" className="block w-full cursor-pointer group">
+            <div className="w-full relative overflow-hidden">
+              <img
+                src="/dream-numbers-banner.png"
+                alt="Dream Numbers Banner"
+                className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-orange-50/80 backdrop-blur-sm border-t border-orange-100">
+              <span className="text-orange-800 font-bold uppercase text-sm tracking-wider pl-2">Tap to see interpretation</span>
+              <span className="text-sm font-black text-orange-700 pr-2">View All →</span>
+            </div>
+          </Link>
           <div className="p-6 grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="text-center p-3 bg-orange-50 rounded-lg">
               <div className="font-bold text-orange-800">🐍 Snake</div>
@@ -175,11 +192,21 @@ export default async function Home() {
         </div>
 
         {/* Common Numbers Section */}
-        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-green-600 mb-8">
-          <div className="flex justify-between items-center bg-gradient-to-r from-green-700 to-green-500 text-white p-4">
-            <h2 className="text-xl md:text-2xl font-black uppercase">🔢 Common Numbers</h2>
-            <Link href="/common-numbers" className="text-sm hover:underline font-bold">View All →</Link>
-          </div>
+        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-green-600 mb-8 transition-transform hover:scale-[1.01]">
+          <Link href="/common-numbers" className="block w-full cursor-pointer group">
+            <div className="w-full relative overflow-hidden">
+              <img
+                src="/common-numbers-banner.png"
+                alt="Common Numbers Banner"
+                className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-green-50/80 backdrop-blur-sm border-t border-green-100">
+              <span className="text-green-800 font-bold uppercase text-sm tracking-wider pl-2">Check common numbers</span>
+              <span className="text-sm font-black text-green-700 pr-2">View All →</span>
+            </div>
+          </Link>
           <div className="p-6">
             <div className="grid grid-cols-5 md:grid-cols-10 gap-3">
               {['12', '23', '34', '45', '56', '67', '78', '89', '90', '01'].map((num) => (
