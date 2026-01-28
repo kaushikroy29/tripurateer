@@ -13,19 +13,22 @@ export default function CommonNumbersPage() {
     };
 
     return (
-        <main className="min-h-screen bg-[url('/pattern.png')] bg-gray-50 flex flex-col items-center py-8 px-4 font-sans">
-            <header className="flex flex-col items-center mb-6 w-full">
+        <main className="min-h-screen teer-background flex flex-col items-center py-8 px-4 font-sans relative">
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]"></div>
+
+            <header className="relative z-10 flex flex-col items-center mb-6 w-full">
+                <div className="w-24 h-24 mb-4 animate-float">
+                    <img src="/logo.png" alt="Logo" className="w-full h-full object-contain rounded-full border-2 border-white shadow-lg" />
+                </div>
                 <h1 className="text-3xl md:text-5xl font-black text-[var(--color-navy)] mb-2 uppercase text-center drop-shadow-sm flex items-center justify-center gap-3">
-                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto invert" />
                     Common Numbers
-                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto invert" style={{ transform: 'scaleX(-1)' }} />
                 </h1>
-                <div className="h-1 w-24 bg-gradient-to-r from-[var(--color-saffron)] to-[var(--color-india-green)] rounded-full"></div>
+                <div className="h-1.5 w-32 bg-gradient-to-r from-[var(--color-saffron)] via-white to-[var(--color-india-green)] rounded-full shadow-sm mt-2"></div>
             </header>
 
-            <p className="text-xl font-bold text-gray-600 mb-8 bg-white px-6 py-2 rounded-full shadow-sm border border-gray-100">{today}</p>
+            <p className="relative z-10 text-lg font-bold text-gray-600 mb-8 bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full shadow-sm border border-gray-100">{today}</p>
 
-            <div className="w-full max-w-2xl bg-white shadow-xl border-t-8 border-[var(--color-saffron)] rounded-xl p-6 mb-8 transform hover:scale-[1.01] transition-transform">
+            <div className="relative z-10 w-full max-w-2xl glass-card shadow-2xl border-t-8 border-[var(--color-saffron)] rounded-2xl p-8 mb-8">
                 <div className="mb-6 p-4 bg-yellow-50 border-l-4 border-[var(--color-saffron)] text-yellow-900 font-bold rounded-r-lg shadow-sm">
                     Disclaimer: These numbers are based on specialized calculations from past results. Success is not guaranteed.
                 </div>
@@ -49,18 +52,18 @@ export default function CommonNumbersPage() {
                 </div>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-4 justify-center w-full max-w-2xl">
+            <div className="relative z-10 mt-4 flex flex-wrap gap-4 justify-center w-full max-w-2xl">
                 <Link
                     href="/"
-                    className="bg-white hover:bg-gray-100 text-[var(--color-navy)] font-bold py-3 px-8 rounded-xl shadow-md border-b-4 border-gray-200 transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
+                    className="bg-white/80 backdrop-blur-sm hover:bg-white text-[var(--color-navy)] font-black py-4 px-8 rounded-2xl shadow-lg transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px] border border-white"
                 >
-                    &larr; Back to Home
+                    &larr; BACK HOME
                 </Link>
                 <Link
                     href="/dream-numbers"
-                    className="bg-gradient-saffron text-white font-bold py-3 px-8 rounded-xl shadow-lg border-b-4 border-orange-700 transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
+                    className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black py-4 px-8 rounded-2xl shadow-lg transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
                 >
-                    Dream Numbers
+                    DREAM NUMBERS
                 </Link>
             </div>
         </main>

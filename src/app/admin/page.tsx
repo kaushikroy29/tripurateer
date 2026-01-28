@@ -34,43 +34,50 @@ export default function AdminPage() {
     }
 
     return (
-        <main className="min-h-screen bg-gray-100 flex flex-col items-center py-10 px-4">
-            <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg border-2 border-black">
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-2xl font-bold uppercase">Admin Panel</h1>
-                    <button
-                        onClick={handleLogout}
-                        className="text-red-600 hover:text-red-800 font-bold text-sm underline"
-                    >
-                        Logout
-                    </button>
+        <main className="min-h-screen teer-background flex flex-col items-center py-10 px-4 relative overflow-hidden">
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]"></div>
+
+            <div className="relative z-10 w-full max-w-md glass-card p-8 rounded-3xl shadow-2xl border-white/20">
+                <div className="flex flex-col items-center mb-8">
+                    <div className="w-20 h-20 mb-3 animate-float">
+                        <img src="/logo.png" alt="Logo" className="w-full h-full object-contain rounded-full border-2 border-white shadow-lg" />
+                    </div>
+                    <div className="flex justify-between items-center w-full">
+                        <h1 className="text-2xl font-black uppercase text-[var(--color-navy)] tracking-tight">Admin Control</h1>
+                        <button
+                            onClick={handleLogout}
+                            className="bg-red-50 text-red-600 hover:bg-red-100 px-3 py-1 rounded-full font-bold text-xs transition-colors border border-red-100"
+                        >
+                            Log Out
+                        </button>
+                    </div>
                 </div>
 
-                <div className="flex mb-6 border-b border-gray-200">
+                <div className="flex p-1 bg-gray-100/50 rounded-xl mb-8 gap-1 border border-gray-100">
                     <button
                         onClick={() => setSettingsTab(false)}
-                        className={`flex-1 py-2 font-bold ${!settingsTab ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'}`}
+                        className={`flex-1 py-2.5 rounded-lg font-black text-sm transition-all ${!settingsTab ? 'bg-white text-[var(--color-navy)] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                     >
-                        Results
+                        📝 RESULTS
                     </button>
                     <button
                         onClick={() => setSettingsTab(true)}
-                        className={`flex-1 py-2 font-bold ${settingsTab ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500'}`}
+                        className={`flex-1 py-2.5 rounded-lg font-black text-sm transition-all ${settingsTab ? 'bg-white text-[var(--color-navy)] shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
                     >
-                        Settings
+                        ⚙️ SETTINGS
                     </button>
                 </div>
 
                 {!settingsTab ? (
                     <form action={handleResultUpdate} className="flex flex-col gap-6">
-                        <div>
-                            <label className="block font-bold mb-1">Date</label>
+                        <div className="mb-2">
+                            <label className="block font-black text-xs text-[var(--color-navy)] uppercase mb-1.5 ml-1">Select Date</label>
                             <input
                                 name="date"
                                 type="date"
                                 defaultValue={today}
                                 required
-                                className="w-full border-2 border-gray-300 p-2 rounded text-lg"
+                                className="w-full bg-white border border-gray-200 p-3 rounded-xl text-lg font-bold focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all shadow-sm"
                             />
                         </div>
 
@@ -134,9 +141,9 @@ export default function AdminPage() {
 
                         <button
                             type="submit"
-                            className="mt-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg text-lg transition-colors shadow-md"
+                            className="mt-4 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white font-black py-4 rounded-xl text-lg transition-all shadow-lg active:scale-95 uppercase tracking-wider"
                         >
-                            Save Results
+                            Publish Results
                         </button>
                     </form>
                 ) : (
@@ -163,9 +170,9 @@ export default function AdminPage() {
 
                         <button
                             type="submit"
-                            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded text-lg transition-colors"
+                            className="mt-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white font-black py-4 rounded-xl text-lg transition-all shadow-lg active:scale-95 uppercase tracking-wider"
                         >
-                            Update Settings
+                            Apply Changes
                         </button>
                     </form>
                 )}

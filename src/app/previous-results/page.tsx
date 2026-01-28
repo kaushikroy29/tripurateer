@@ -8,17 +8,20 @@ export default async function PreviousResults() {
     const history = await getPreviousResults(today);
 
     return (
-        <main className="min-h-screen bg-gray-50 flex flex-col items-center py-8 px-4 font-sans">
-            <header className="flex flex-col items-center mb-6 w-full">
+        <main className="min-h-screen teer-background flex flex-col items-center py-8 px-4 font-sans relative">
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]"></div>
+
+            <header className="relative z-10 flex flex-col items-center mb-8 w-full">
+                <div className="w-24 h-24 mb-4 animate-float">
+                    <img src="/logo.png" alt="Logo" className="w-full h-full object-contain rounded-full border-2 border-white shadow-lg" />
+                </div>
                 <h1 className="text-3xl md:text-5xl font-black text-[var(--color-navy)] mb-2 uppercase text-center drop-shadow-sm flex items-center justify-center gap-3">
-                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto invert" />
                     Previous Results
-                    <img src="/teer-icon.png" alt="Decoration" className="h-12 w-auto invert" style={{ transform: 'scaleX(-1)' }} />
                 </h1>
-                <div className="h-1 w-24 bg-gradient-to-r from-[var(--color-saffron)] to-[var(--color-india-green)] rounded-full"></div>
+                <div className="h-1.5 w-32 bg-gradient-to-r from-[var(--color-saffron)] via-white to-[var(--color-india-green)] rounded-full shadow-sm mt-2"></div>
             </header>
 
-            <div className="w-full max-w-2xl overflow-x-auto bg-white shadow-xl border-0 rounded-xl mb-8">
+            <div className="relative z-10 w-full max-w-2xl overflow-x-auto glass-card shadow-2xl border-0 rounded-2xl mb-8">
                 <table className="w-full border-collapse text-center text-xl font-bold">
                     <thead className="bg-[var(--color-navy)] text-white">
                         <tr>
@@ -55,24 +58,24 @@ export default async function PreviousResults() {
                 </table>
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-4 justify-center w-full max-w-2xl">
+            <div className="relative z-10 mt-4 flex flex-wrap gap-4 justify-center w-full max-w-2xl">
                 <Link
                     href="/"
-                    className="bg-white hover:bg-gray-100 text-[var(--color-navy)] font-bold py-3 px-8 rounded-xl shadow-md border-b-4 border-gray-200 transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
+                    className="bg-white/80 backdrop-blur-sm hover:bg-white text-[var(--color-navy)] font-black py-4 px-8 rounded-2xl shadow-lg transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px] border border-white"
                 >
-                    &larr; Back to Home
+                    &larr; BACK HOME
                 </Link>
                 <Link
                     href="/dream-numbers"
-                    className="bg-gradient-saffron text-white font-bold py-3 px-8 rounded-xl shadow-lg border-b-4 border-orange-700 transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
+                    className="bg-gradient-to-r from-orange-600 to-orange-500 text-white font-black py-4 px-8 rounded-2xl shadow-lg transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
                 >
-                    Dream Numbers
+                    DREAM NUMBERS
                 </Link>
                 <Link
                     href="/common-numbers"
-                    className="bg-gradient-green text-white font-bold py-3 px-8 rounded-xl shadow-lg border-b-4 border-green-800 transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
+                    className="bg-gradient-to-r from-green-700 to-green-600 text-white font-black py-4 px-8 rounded-2xl shadow-lg transition-all active:scale-95 text-lg flex-1 text-center min-w-[200px]"
                 >
-                    Common Numbers
+                    COMMON NUMBERS
                 </Link>
             </div>
         </main>
