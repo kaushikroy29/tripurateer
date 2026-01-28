@@ -15,21 +15,18 @@ export default async function Home() {
   const { youtubeVideoId, noticeText } = settings;
 
   return (
-    <main className="min-h-screen flex flex-col items-center py-8 px-4 font-sans relative" style={{
-      background: 'linear-gradient(135deg, #D44800 0%, #D44800 25%, #F0F0F0 25%, #F0F0F0 65%, #004225 65%, #004225 100%)',
-      backgroundAttachment: 'fixed',
-    }}>
-      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
+    <main className="min-h-screen flex flex-col items-center py-8 px-4 font-sans relative teer-background">
+      <div className="absolute inset-0 bg-white/10 backdrop-blur-[2px]"></div>
 
       {/* Content wrapper */}
       <div className="relative z-10 flex flex-col items-center w-full">
         {/* Header with Logo */}
         <header className="flex flex-col items-center mb-6 w-full">
-          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4 transform hover:scale-105 transition-transform duration-300">
+          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-4 animate-float">
             <img
               src="/logo.png"
               alt="Tripura Teer Logo"
-              className="w-full h-full object-contain drop-shadow-2xl rounded-full border-4 border-white"
+              className="w-full h-full object-contain drop-shadow-2xl rounded-full border-4 border-white shadow-2xl"
             />
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-[var(--color-navy)] uppercase tracking-tighter drop-shadow-sm text-center">
@@ -56,8 +53,8 @@ export default async function Home() {
         {/* Results Section */}
         <div className="w-full max-w-4xl flex flex-col gap-6 mb-8">
           {/* Day Teer */}
-          <div className="bg-white shadow-xl rounded-2xl overflow-hidden transform transition-all hover:scale-[1.01] border-t-4 border-[var(--color-saffron)]">
-            <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md tracking-wide">
+          <div className="glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-[var(--color-saffron)]">
+            <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white shadow-md tracking-wide">
               ☀️ DAY TEER RESULTS
             </h2>
             <div className="p-4">
@@ -89,8 +86,8 @@ export default async function Home() {
           </div>
 
           {/* Night Teer */}
-          <div className="bg-white shadow-xl rounded-2xl overflow-hidden transform transition-all hover:scale-[1.01] border-t-4 border-indigo-600">
-            <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-indigo-800 to-indigo-600 text-white shadow-md tracking-wide">
+          <div className="glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-indigo-600">
+            <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-indigo-900 to-indigo-700 text-white shadow-md tracking-wide">
               🌙 NIGHT TEER RESULTS
             </h2>
             <div className="p-4">
@@ -123,21 +120,21 @@ export default async function Home() {
         </div>
 
         {/* Previous Results Section */}
-        <div className="w-full max-w-4xl bg-white shadow-xl rounded-2xl overflow-hidden border-t-4 border-blue-500 mb-8">
-          <div className="flex justify-between items-center bg-gradient-to-r from-blue-600 to-blue-500 text-white p-4">
+        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-blue-500 mb-8">
+          <div className="flex justify-between items-center bg-gradient-to-r from-blue-700 to-blue-500 text-white p-4">
             <h2 className="text-xl md:text-2xl font-black uppercase flex items-center gap-2">
               <img src="/teer-icon.png" alt="Decoration" className="h-8 w-auto" />
               Previous Results
             </h2>
-            <Link href="/previous-results" className="text-sm hover:underline">View All →</Link>
+            <Link href="/previous-results" className="text-sm hover:underline font-bold">View All →</Link>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-center text-lg font-bold">
-              <thead className="bg-[var(--color-navy)] text-white">
+              <thead className="bg-[#000033] text-white">
                 <tr>
-                  <th className="p-3 uppercase tracking-wider border-b-4 border-orange-500">Date</th>
-                  <th className="p-3 uppercase tracking-wider border-b-4 border-white">First</th>
-                  <th className="p-3 uppercase tracking-wider border-b-4 border-green-500">Second</th>
+                  <th className="p-3 uppercase tracking-wider border-b-4 border-orange-500 text-xs">Date</th>
+                  <th className="p-3 uppercase tracking-wider border-b-4 border-white text-xs">First</th>
+                  <th className="p-3 uppercase tracking-wider border-b-4 border-green-500 text-xs">Second</th>
                 </tr>
               </thead>
               <tbody>
@@ -156,10 +153,10 @@ export default async function Home() {
         </div>
 
         {/* Dream Numbers Section */}
-        <div className="w-full max-w-4xl bg-white shadow-xl rounded-2xl overflow-hidden border-t-4 border-orange-500 mb-8">
-          <div className="flex justify-between items-center bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4">
+        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-orange-500 mb-8">
+          <div className="flex justify-between items-center bg-gradient-to-r from-orange-600 to-orange-400 text-white p-4">
             <h2 className="text-xl md:text-2xl font-black uppercase">💭 Dream Numbers</h2>
-            <Link href="/dream-numbers" className="text-sm hover:underline">View All →</Link>
+            <Link href="/dream-numbers" className="text-sm hover:underline font-bold">View All →</Link>
           </div>
           <div className="p-6 grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="text-center p-3 bg-orange-50 rounded-lg">
@@ -178,10 +175,10 @@ export default async function Home() {
         </div>
 
         {/* Common Numbers Section */}
-        <div className="w-full max-w-4xl bg-white shadow-xl rounded-2xl overflow-hidden border-t-4 border-green-600 mb-8">
-          <div className="flex justify-between items-center bg-gradient-to-r from-green-600 to-green-700 text-white p-4">
+        <div className="w-full max-w-4xl glass-card shadow-xl rounded-2xl overflow-hidden border-t-4 border-green-600 mb-8">
+          <div className="flex justify-between items-center bg-gradient-to-r from-green-700 to-green-500 text-white p-4">
             <h2 className="text-xl md:text-2xl font-black uppercase">🔢 Common Numbers</h2>
-            <Link href="/common-numbers" className="text-sm hover:underline">View All →</Link>
+            <Link href="/common-numbers" className="text-sm hover:underline font-bold">View All →</Link>
           </div>
           <div className="p-6">
             <div className="grid grid-cols-5 md:grid-cols-10 gap-3">
@@ -195,9 +192,9 @@ export default async function Home() {
         </div>
 
         {/* Live Stream Section */}
-        <div className="w-full max-w-4xl bg-white shadow-2xl rounded-2xl overflow-hidden border-t-4 border-red-500 mb-8">
-          <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-red-600 to-red-500 text-white shadow-md tracking-wide flex items-center justify-center gap-2">
-            <span className="w-3 h-3 bg-white rounded-full animate-pulse"></span>
+        <div className="w-full max-w-4xl glass-card shadow-2xl rounded-2xl overflow-hidden border-t-4 border-red-500 mb-8">
+          <h2 className="text-xl md:text-2xl font-black text-center py-3 bg-gradient-to-r from-red-700 to-red-500 text-white shadow-md tracking-wide flex items-center justify-center gap-2">
+            <span className="w-3 h-3 bg-white rounded-full animate-ping"></span>
             LIVE STREAM
           </h2>
           <div className="aspect-video">
