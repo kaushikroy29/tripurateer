@@ -1,7 +1,5 @@
 'use client';
 
-import Script from 'next/script';
-
 // Organization Schema
 export function OrganizationJsonLd() {
     const schema = {
@@ -20,11 +18,9 @@ export function OrganizationJsonLd() {
     };
 
     return (
-        <Script
-            id="organization-jsonld"
+        <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-            strategy="afterInteractive"
         />
     );
 }
@@ -56,11 +52,9 @@ export function WebSiteJsonLd() {
     };
 
     return (
-        <Script
-            id="website-jsonld"
+        <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-            strategy="afterInteractive"
         />
     );
 }
@@ -101,11 +95,9 @@ export function TeerEventJsonLd({ name, description, startTime, location }: Teer
     };
 
     return (
-        <Script
-            id={`event-${name.replace(/\s+/g, '-').toLowerCase()}-jsonld`}
+        <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-            strategy="afterInteractive"
         />
     );
 }
@@ -136,11 +128,9 @@ export function FAQJsonLd({ faqs, id = 'faq' }: FAQProps) {
     };
 
     return (
-        <Script
-            id={`${id}-jsonld`}
+        <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-            strategy="afterInteractive"
         />
     );
 }
@@ -168,11 +158,9 @@ export function BreadcrumbJsonLd({ items }: BreadcrumbProps) {
     };
 
     return (
-        <Script
-            id="breadcrumb-jsonld"
+        <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-            strategy="afterInteractive"
         />
     );
 }
@@ -222,11 +210,9 @@ export function LotteryResultJsonLd() {
     };
 
     return (
-        <Script
-            id="lottery-result-jsonld"
+        <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-            strategy="afterInteractive"
         />
     );
 }
