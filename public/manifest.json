@@ -1,0 +1,23 @@
+{
+    "name": "Tripura Teer",
+    "short_name": "TripuraTeer",
+    "description": "Get the latest Tripura Teer results, common numbers, and dream numbers. Fast and accurate updates.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fdfbf7",
+    "theme_color": "#FF9933",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "games",
+        "entertainment"
+    ]
+}
