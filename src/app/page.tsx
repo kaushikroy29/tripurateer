@@ -4,13 +4,86 @@ import Link from 'next/link';
 
 export const revalidate = 0;
 
+// Helper function to get current time in Indian Standard Time (IST - UTC+5:30)
+function getIndianTime(): Date {
+  const now = new Date();
+  // Get UTC time, then add 5 hours 30 minutes for IST
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  const istOffset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds
+  return new Date(utc + istOffset);
+}
+
+// Helper function to get IST date string in YYYY-MM-DD format
+function getIndianDateString(): string {
+  const ist = getIndianTime();
+  const year = ist.getFullYear();
+  const month = String(ist.getMonth() + 1).padStart(2, '0');
+  const day = String(ist.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// Check if yesterday's result should still be shown (within 18 hours of result time)
+function isYesterdayResultValid(resultType: 'day_round1' | 'day_round2' | 'night_round1' | 'night_round2'): boolean {
+  const now = getIndianTime();
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const currentTimeInMinutes = hours * 60 + minutes;
+
+  // Result times in IST (convert to minutes from midnight)
+  const resultTimes = {
+    day_round1: 15 * 60 + 45,   // 3:45 PM = 945 minutes
+    day_round2: 16 * 60 + 45,   // 4:45 PM = 1005 minutes
+    night_round1: 21 * 60 + 10, // 9:10 PM = 1270 minutes
+    night_round2: 22 * 60 + 10  // 10:10 PM = 1330 minutes
+  };
+
+  const scheduledTime = resultTimes[resultType];
+
+  // Minutes elapsed since yesterday's scheduled time
+  // Formula: (Time remaining in yesterday) + (Time passed today)
+  // Time remaining in yesterday = 24*60 - scheduledTime
+  const minutesSinceYesterday = (24 * 60 - scheduledTime) + currentTimeInMinutes;
+
+  // Show result for 18 hours (1080 minutes)
+  return minutesSinceYesterday <= 18 * 60;
+}
+
 export default async function Home() {
-  const today = new Date().toISOString().split('T')[0];
+  const today = getIndianDateString();
+  const indianTime = getIndianTime();
   const [result, settings, previousResults] = await Promise.all([
     getResultByDate(today),
     getSiteSettings(),
     getPreviousResults(today)
   ]);
+
+  const yesterdayResult = previousResults.length > 0 ? previousResults[0] : null;
+
+  // Helper to determine what to display
+  const getDisplayValue = (
+    round: 'round1' | 'round2' | 'night_round1' | 'night_round2',
+    currentResult: any,
+    prevResult: any
+  ) => {
+    // 1. If we have today's result, ALWAYS show it
+    if (currentResult && currentResult[round]) {
+      return currentResult[round];
+    }
+
+    // 2. If we have yesterday's result AND it's not expired (within 18h), show it
+    // Map database keys to valid keys for our helper
+    const checkType = round === 'round1' ? 'day_round1' :
+      round === 'round2' ? 'day_round2' :
+        round === 'night_round1' ? 'night_round1' :
+          'night_round2';
+
+    if (prevResult && prevResult[round] && isYesterdayResultValid(checkType as any)) {
+      return prevResult[round];
+    }
+
+    // 3. Otherwise show replacement
+    return 'XX';
+  };
 
   const { youtubeVideoId, noticeText } = settings;
 
@@ -36,17 +109,24 @@ export default async function Home() {
         </header>
 
         <p className="text-lg md:text-xl font-bold text-gray-600 mb-6 bg-white/80 backdrop-blur-sm px-6 py-2 rounded-full shadow-sm border border-gray-100">
-          📅 {new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+          📅 {indianTime.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
         </p>
 
         {/* Notice Section */}
-        <div className="w-full max-w-4xl bg-gradient-to-r from-yellow-100 to-orange-100 border-l-4 border-[var(--color-saffron)] p-4 rounded-r-xl shadow-md mb-8 animate-pulse">
-          <div className="flex items-start gap-3">
-            <span className="text-2xl">📢</span>
-            <div>
-              <h3 className="font-black text-[var(--color-navy)] text-lg uppercase">Latest Notice</h3>
-              <p className="text-gray-700 font-medium">{noticeText}</p>
-            </div>
+        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl overflow-hidden mb-8 transform transition-all hover:scale-[1.01]">
+          <div className="w-full h-32 md:h-48 relative bg-gray-100">
+            <img
+              src="/notice-banner.png"
+              alt="Latest Notice"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-black/50 to-transparent"></div>
+            <h3 className="absolute bottom-3 left-4 text-white font-black text-xl md:text-2xl drop-shadow-md flex items-center gap-2">
+              <span className="animate-pulse">📢</span> LATEST UPDATE
+            </h3>
+          </div>
+          <div className="p-5 bg-gradient-to-r from-yellow-50 to-orange-50 border-t-4 border-[var(--color-saffron)]">
+            <p className="text-gray-800 font-bold text-lg leading-relaxed">{noticeText}</p>
           </div>
         </div>
 
@@ -74,10 +154,10 @@ export default async function Home() {
                   <tr>
                     <td className="p-3 text-gray-500 font-extrabold bg-gray-50 text-sm">Result</td>
                     <td className="p-3 text-3xl md:text-4xl text-[var(--color-saffron)] font-black drop-shadow-sm">
-                      {result?.round1 || 'XX'}
+                      {getDisplayValue('round1', result, yesterdayResult)}
                     </td>
                     <td className="p-3 text-3xl md:text-4xl text-[var(--color-india-green)] font-black drop-shadow-sm">
-                      {result?.round2 || 'XX'}
+                      {getDisplayValue('round2', result, yesterdayResult)}
                     </td>
                   </tr>
                 </tbody>
@@ -107,10 +187,10 @@ export default async function Home() {
                   <tr>
                     <td className="p-3 text-gray-500 font-extrabold bg-gray-50 text-sm">Result</td>
                     <td className="p-3 text-3xl md:text-4xl text-indigo-600 font-black drop-shadow-sm">
-                      {result?.night_round1 || 'XX'}
+                      {getDisplayValue('night_round1', result, yesterdayResult)}
                     </td>
                     <td className="p-3 text-3xl md:text-4xl text-purple-600 font-black drop-shadow-sm">
-                      {result?.night_round2 || 'XX'}
+                      {getDisplayValue('night_round2', result, yesterdayResult)}
                     </td>
                   </tr>
                 </tbody>

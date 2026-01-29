@@ -40,13 +40,15 @@ export async function saveResult(data: CreateResultInput): Promise<LotteryResult
 
     if (existing) {
         // Update existing
+        // Use new data if provided, otherwise keep existing data
+        // This allows updating just one round without clearing others
         const { data: updated, error } = await supabase
             .from('results')
             .update({
-                round1: data.round1,
-                round2: data.round2,
-                night_round1: data.night_round1,
-                night_round2: data.night_round2
+                round1: data.round1 || existing.round1,
+                round2: data.round2 || existing.round2,
+                night_round1: data.night_round1 || existing.night_round1,
+                night_round2: data.night_round2 || existing.night_round2
             })
             .eq('date', data.date)
             .select()
