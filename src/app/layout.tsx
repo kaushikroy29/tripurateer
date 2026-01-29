@@ -74,7 +74,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [
       {
-        url: "/logo.png",
+        url: "https://tripurateer.in/logo.png",
         width: 512,
         height: 512,
         alt: "Tripura Teer Logo",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tripura Teer Result Today | Live FR & SR Results",
     description: siteDescription,
-    images: ["/logo.png"],
+    images: ["https://tripurateer.in/logo.png"],
     creator: "@tripurateer",
   },
   robots: {
