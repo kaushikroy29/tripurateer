@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     },
 };
 
+export const revalidate = 3600; // Revalidate every hour
+
 export default function CommonNumbersPage() {
     const today = new Date().toLocaleDateString('en-IN', {
         weekday: 'long',
