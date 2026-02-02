@@ -72,9 +72,11 @@ export default async function PreviousResults() {
                             {history.map((item, index) => (
                                 <tr key={item.id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-orange-50 transition-colors`}>
                                     <td className="p-4 text-lg text-[var(--color-navy)] border-b border-gray-200">
-                                        {new Date(item.date).toLocaleDateString('en-IN', {
-                                            day: 'numeric', month: 'short', year: 'numeric'
-                                        })}
+                                        <Link href={`/results/${item.date}`} className="hover:text-orange-600 hover:underline transition-colors">
+                                            {new Date(item.date).toLocaleDateString('en-IN', {
+                                                day: 'numeric', month: 'short', year: 'numeric'
+                                            })}
+                                        </Link>
                                     </td>
                                     <td className="p-4 text-red-600 font-black border-b border-gray-200 bg-orange-50/30">{item.round1}</td>
                                     <td className="p-4 text-green-700 font-black border-b border-gray-200 border-r border-gray-300 bg-orange-50/30">{item.round2}</td>

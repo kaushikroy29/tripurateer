@@ -102,9 +102,9 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: siteUrl,
+    canonical: "./",
     languages: {
-      "en-IN": siteUrl,
+      "en-IN": "./",
     },
   },
   category: "Lottery Results",

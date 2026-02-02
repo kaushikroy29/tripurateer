@@ -1,19 +1,19 @@
 import { MetadataRoute } from 'next'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://tripurateer.in'
     const currentDate = new Date()
 
-    // Generate dates for the last 30 days for result archives
-    const generateRecentDates = () => {
-        const dates = []
-        for (let i = 0; i < 30; i++) {
-            const date = new Date()
-            date.setDate(date.getDate() - i)
-            dates.push(date.toISOString().split('T')[0])
-        }
-        return dates
-    }
+    // Get all available result dates
+    const { getAllResultDates } = await import('@/lib/storage');
+    const dates = await getAllResultDates();
+
+    const resultUrls: MetadataRoute.Sitemap = dates.map(date => ({
+        url: `${baseUrl}/results/${date}`,
+        lastModified: new Date(date), // Results for a past date rarely change
+        changeFrequency: 'never',
+        priority: 0.6,
+    }));
 
     const staticPages: MetadataRoute.Sitemap = [
         {
@@ -42,6 +42,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
     ]
 
-    return staticPages
+    return [...staticPages, ...resultUrls]
 }
 

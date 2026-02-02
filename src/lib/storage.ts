@@ -34,6 +34,16 @@ export async function getPreviousResults(beforeDate: string): Promise<LotteryRes
     return data as LotteryResult[];
 }
 
+export async function getAllResultDates(): Promise<string[]> {
+    const { data, error } = await supabase
+        .from('results')
+        .select('date')
+        .order('date', { ascending: false });
+
+    if (error || !data) return [];
+    return data.map(r => r.date);
+}
+
 export async function saveResult(data: CreateResultInput): Promise<LotteryResult> {
     // Check if result exists for this date
     const existing = await getResultByDate(data.date);

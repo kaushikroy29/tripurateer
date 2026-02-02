@@ -1,10 +1,23 @@
-'use client';
-
 import Link from 'next/link';
 import { FAQJsonLd, BreadcrumbJsonLd } from '@/components/JsonLd';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Teer Common Numbers Today - Direct, House, Ending | Tripura Teer",
+    description: "Check today's Tripura Teer common numbers. Get daily target numbers, house, and ending suggestions calculated from past results.",
+    alternates: {
+        canonical: 'https://tripurateer.in/common-numbers',
+    },
+};
 
 export default function CommonNumbersPage() {
-    const today = new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const today = new Date().toLocaleDateString('en-IN', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        timeZone: 'Asia/Kolkata'
+    });
 
     // Mock data for display
     const commonNumbers = {
