@@ -151,8 +151,11 @@ export default async function Home() {
               />
             </div>
             <h1 className="text-4xl md:text-6xl font-black text-[var(--color-navy)] uppercase tracking-tighter drop-shadow-sm text-center">
-              Tripura Teer
+              Tripura Teer Result
             </h1>
+            <p className="text-center text-gray-600 font-medium mt-3 max-w-2xl px-4 leading-relaxed">
+              Fastest live updates for Tripura Teer Result today, including First Round (FR) and Second Round (SR) outcomes.
+            </p>
             <div className="h-1.5 w-48 bg-gradient-to-r from-[var(--color-saffron)] via-white to-[var(--color-india-green)] rounded-full shadow-sm mt-4"></div>
           </header>
 

@@ -1,4 +1,21 @@
-'use client';
+
+// Helper to get current time in Indian Standard Time (IST - UTC+5:30)
+function getIndianTime(): Date {
+    const now = new Date();
+    // Get UTC time, then add 5 hours 30 minutes for IST
+    const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+    const istOffset = 5.5 * 60 * 60 * 1000; // 5.5 hours in milliseconds
+    return new Date(utc + istOffset);
+}
+
+// Helper to get IST date string in YYYY-MM-DD format
+function getIndianDateString(): string {
+    const ist = getIndianTime();
+    const year = ist.getFullYear();
+    const month = String(ist.getMonth() + 1).padStart(2, '0');
+    const day = String(ist.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 
 // Organization Schema
 export function OrganizationJsonLd() {
@@ -6,6 +23,7 @@ export function OrganizationJsonLd() {
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'Tripura Teer',
+        alternateName: 'Tripura Teer Result',
         url: 'https://tripurateer.in',
         logo: 'https://tripurateer.in/logo.png',
         sameAs: [],
@@ -31,6 +49,7 @@ export function WebSiteJsonLd() {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'Tripura Teer',
+        alternateName: ['Tripura Teer Result', 'Teer Result'],
         url: 'https://tripurateer.in',
         description: 'Get the latest Tripura Teer results, common numbers, and dream numbers. Fast and accurate updates daily.',
         potentialAction: {
@@ -68,7 +87,16 @@ interface TeerEventProps {
 }
 
 export function TeerEventJsonLd({ name, description, startTime, location }: TeerEventProps) {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getIndianDateString();
+
+    // Check if the event for today is past (simple heuristic or passed prop)
+    // For now, we assume we are generating schema for the "relevant" upcoming or active event
+    // The startTime prop usually includes timezone offset like "15:45:00+05:30"
+    // We strip the offset from input if present to combine with today's date safely, 
+    // BUT the prop passed from page.tsx is "15:45:00+05:30".
+    // We need to form a valid ISO string. 
+    // If we just concat `${today}T${startTime}`, we get "2024-03-01T15:45:00+05:30" which is correct ISO.
+
     const schema = {
         '@context': 'https://schema.org',
         '@type': 'Event',
@@ -167,18 +195,23 @@ export function BreadcrumbJsonLd({ items }: BreadcrumbProps) {
 
 // Gambling/Lottery Result Schema
 export function LotteryResultJsonLd() {
-    const today = new Date().toISOString().split('T')[0];
+    const today = getIndianDateString();
+
+    // We use the current Indian time for datePublished/Modified to indicate freshness
+    const now = getIndianTime();
+    const isoNow = now.toISOString().split('.')[0] + '+05:30'; // Approximate ISO with IST offset
+
     const schema = {
         '@context': 'https://schema.org',
         '@type': 'WebPage',
-        name: 'Tripura Teer Result Today',
-        description: 'Live Tripura Teer lottery results including Day Teer and Night Teer rounds. Updated daily with First Round (FR) and Second Round (SR) results.',
-        datePublished: today,
-        dateModified: today,
+        name: `Tripura Teer Result Today - ${today}`,
+        description: `Live Tripura Teer Result for ${today}. Get fastest updates for Day Teer (FR/SR) and Night Teer results.`,
+        datePublished: `${today}T08:00:00+05:30`, // Assume published morning
+        dateModified: isoNow,
         mainEntity: {
             '@type': 'ItemList',
-            name: 'Teer Results',
-            description: 'Daily Teer lottery results from Tripura',
+            name: `Tripura Teer Results ${today}`,
+            description: `Daily Teer lottery results from Tripura for ${today}`,
             numberOfItems: 4,
             itemListElement: [
                 {
