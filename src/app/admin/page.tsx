@@ -84,7 +84,7 @@ export default function AdminPage() {
                         {/* Day Teer Section */}
                         <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
                             <h3 className="font-bold text-lg mb-3 text-orange-800 uppercase flex items-center gap-2">
-                                ☀️ Day Teer <span className="text-xs bg-orange-200 px-2 py-0.5 rounded text-orange-800">3:45 PM / 4:45 PM</span>
+                                ☀️ Day Teer <span className="text-xs bg-orange-200 px-2 py-0.5 rounded text-orange-800">4:05 PM / 5:00 PM</span>
                             </h3>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
@@ -113,7 +113,7 @@ export default function AdminPage() {
                         {/* Night Teer Section */}
                         <div className="bg-indigo-50 p-4 rounded-lg border border-indigo-200">
                             <h3 className="font-bold text-lg mb-3 text-indigo-900 uppercase flex items-center gap-2">
-                                🌙 Night Teer <span className="text-xs bg-indigo-200 px-2 py-0.5 rounded text-indigo-800">9:10 PM / 10:10 PM</span>
+                                🌙 Night Teer <span className="text-xs bg-indigo-200 px-2 py-0.5 rounded text-indigo-800">9:30 PM / 10:30 PM</span>
                             </h3>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>

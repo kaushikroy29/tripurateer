@@ -218,25 +218,25 @@ export function LotteryResultJsonLd() {
                     '@type': 'ListItem',
                     position: 1,
                     name: 'Day Teer First Round',
-                    description: 'Day Teer FR result at 3:45 PM IST'
+                    description: 'Day Teer FR result at 4:05 PM IST'
                 },
                 {
                     '@type': 'ListItem',
                     position: 2,
                     name: 'Day Teer Second Round',
-                    description: 'Day Teer SR result at 4:45 PM IST'
+                    description: 'Day Teer SR result at 5:00 PM IST'
                 },
                 {
                     '@type': 'ListItem',
                     position: 3,
                     name: 'Night Teer First Round',
-                    description: 'Night Teer FR result at 9:10 PM IST'
+                    description: 'Night Teer FR result at 9:30 PM IST'
                 },
                 {
                     '@type': 'ListItem',
                     position: 4,
                     name: 'Night Teer Second Round',
-                    description: 'Night Teer SR result at 10:10 PM IST'
+                    description: 'Night Teer SR result at 10:30 PM IST'
                 }
             ]
         }

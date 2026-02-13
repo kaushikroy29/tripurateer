@@ -22,6 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: `Winning numbers for Tripura Teer Day and Night games on ${date}.`,
             url: `https://tripurateer.in/results/${params.date}`,
         },
+        alternates: {
+            canonical: `https://tripurateer.in/results/${params.date}`,
+        },
     };
 }
 
@@ -102,13 +105,13 @@ export default async function DateResultPage({ params }: Props) {
                         </div>
                         <div className="p-6 grid grid-cols-2 gap-4 text-center">
                             <div className="p-4 bg-orange-50 rounded-xl border border-orange-100">
-                                <div className="text-sm text-gray-500 uppercase font-semibold mb-1">First Round (3:45 PM)</div>
+                                <div className="text-sm text-gray-500 uppercase font-semibold mb-1">First Round (4:05 PM)</div>
                                 <div className="text-4xl font-black text-[var(--color-navy)] tracking-tight">
                                     {result.round1 ? result.round1 : <span className="text-gray-300 text-2xl">--</span>}
                                 </div>
                             </div>
                             <div className="p-4 bg-orange-50 rounded-xl border border-orange-100">
-                                <div className="text-sm text-gray-500 uppercase font-semibold mb-1">Second Round (4:45 PM)</div>
+                                <div className="text-sm text-gray-500 uppercase font-semibold mb-1">Second Round (5:00 PM)</div>
                                 <div className="text-4xl font-black text-[var(--color-navy)] tracking-tight">
                                     {result.round2 ? result.round2 : <span className="text-gray-300 text-2xl">--</span>}
                                 </div>
@@ -125,13 +128,13 @@ export default async function DateResultPage({ params }: Props) {
                         </div>
                         <div className="p-6 grid grid-cols-2 gap-4 text-center">
                             <div className="p-4 bg-indigo-900/30 rounded-xl border border-indigo-800/30">
-                                <div className="text-sm text-indigo-200 uppercase font-semibold mb-1">First Round (9:10 PM)</div>
+                                <div className="text-sm text-indigo-200 uppercase font-semibold mb-1">First Round (9:30 PM)</div>
                                 <div className="text-4xl font-black text-white tracking-tight">
                                     {result.night_round1 ? result.night_round1 : <span className="text-indigo-400/30 text-2xl">--</span>}
                                 </div>
                             </div>
                             <div className="p-4 bg-indigo-900/30 rounded-xl border border-indigo-800/30">
-                                <div className="text-sm text-indigo-200 uppercase font-semibold mb-1">Second Round (10:10 PM)</div>
+                                <div className="text-sm text-indigo-200 uppercase font-semibold mb-1">Second Round (10:30 PM)</div>
                                 <div className="text-4xl font-black text-white tracking-tight">
                                     {result.night_round2 ? result.night_round2 : <span className="text-indigo-400/30 text-2xl">--</span>}
                                 </div>

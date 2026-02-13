@@ -12,6 +12,9 @@ export const metadata: Metadata = {
         description: 'View complete history of Tripura Teer lottery results including Day Teer and Night Teer rounds.',
         url: 'https://tripurateer.in/previous-results',
     },
+    alternates: {
+        canonical: 'https://tripurateer.in/previous-results',
+    },
 };
 
 export const revalidate = 0;
@@ -23,7 +26,7 @@ export default async function PreviousResults() {
     const faqs = [
         {
             question: 'What time are Tripura Teer results announced?',
-            answer: 'Day Teer results are announced at 3:45 PM (FR) and 4:45 PM (SR). Night Teer results are announced at 9:10 PM (FR) and 10:10 PM (SR).'
+            answer: 'Day Teer results are announced at 4:05 PM (FR) and 5:00 PM (SR). Night Teer results are announced at 9:30 PM (FR) and 10:30 PM (SR).'
         },
         {
             question: 'Where can I find old Tripura Teer results?',

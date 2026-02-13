@@ -3,6 +3,14 @@ import Link from 'next/link';
 import { LotteryResultJsonLd, TeerEventJsonLd, FAQJsonLd, BreadcrumbJsonLd } from '@/components/JsonLd';
 import { ResponsibleGambling } from '@/components/ResponsibleGambling';
 
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://tripurateer.in',
+  },
+};
+
 export const revalidate = 0;
 
 // Helper function to get current time in Indian Standard Time (IST - UTC+5:30)
@@ -32,10 +40,10 @@ function isYesterdayResultValid(resultType: 'day_round1' | 'day_round2' | 'night
 
   // Result times in IST (convert to minutes from midnight)
   const resultTimes = {
-    day_round1: 15 * 60 + 45,   // 3:45 PM = 945 minutes
-    day_round2: 16 * 60 + 45,   // 4:45 PM = 1005 minutes
-    night_round1: 21 * 60 + 10, // 9:10 PM = 1270 minutes
-    night_round2: 22 * 60 + 10  // 10:10 PM = 1330 minutes
+    day_round1: 16 * 60 + 5,    // 4:05 PM = 965 minutes
+    day_round2: 17 * 60 + 0,    // 5:00 PM = 1020 minutes
+    night_round1: 21 * 60 + 30, // 9:30 PM = 1290 minutes
+    night_round2: 22 * 60 + 30  // 10:30 PM = 1350 minutes
   };
 
   const scheduledTime = resultTimes[resultType];
@@ -95,7 +103,7 @@ export default async function Home() {
     },
     {
       question: 'What time are Tripura Teer results announced?',
-      answer: 'Day Teer: First Round at 3:45 PM, Second Round at 4:45 PM. Night Teer: First Round at 9:10 PM, Second Round at 10:10 PM (IST).'
+      answer: 'Day Teer: First Round at 4:05 PM, Second Round at 5:00 PM. Night Teer: First Round at 9:30 PM, Second Round at 10:30 PM (IST).'
     },
     {
       question: 'Is Tripura Teer legal?',
@@ -194,10 +202,10 @@ export default async function Home() {
                     <tr className="bg-orange-50">
                       <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-xs">Target</th>
                       <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-xs">
-                        FR <span className="block text-[10px] text-gray-500">3:45 PM</span>
+                        FR <span className="block text-[10px] text-gray-500">4:05 PM</span>
                       </th>
                       <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-orange-200 text-xs">
-                        SR <span className="block text-[10px] text-gray-500">4:45 PM</span>
+                        SR <span className="block text-[10px] text-gray-500">5:00 PM</span>
                       </th>
                     </tr>
                   </thead>
@@ -227,10 +235,10 @@ export default async function Home() {
                     <tr className="bg-indigo-50">
                       <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-indigo-200 text-xs">Target</th>
                       <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-indigo-200 text-xs">
-                        FR <span className="block text-[10px] text-gray-500">9:10 PM</span>
+                        FR <span className="block text-[10px] text-gray-500">9:30 PM</span>
                       </th>
                       <th className="p-2 text-[var(--color-navy)] uppercase tracking-wider border-b-2 border-indigo-200 text-xs">
-                        SR <span className="block text-[10px] text-gray-500">10:10 PM</span>
+                        SR <span className="block text-[10px] text-gray-500">10:30 PM</span>
                       </th>
                     </tr>
                   </thead>
