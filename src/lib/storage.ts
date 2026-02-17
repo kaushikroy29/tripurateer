@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import { LotteryResult, CreateResultInput } from './types';
+import { LotteryResult, CreateResultInput, CommonNumbers, DreamNumbersEntry } from './types';
 
 export interface SiteSettings {
     noticeText: string;
@@ -117,4 +117,92 @@ export async function updateSiteSettings(settings: Partial<SiteSettings>): Promi
     }
 
     return updated;
+}
+
+// ===== Common Numbers =====
+
+export async function getCommonNumbersByDate(date: string): Promise<CommonNumbers | null> {
+    const { data, error } = await supabase
+        .from('common_numbers')
+        .select('*')
+        .eq('date', date)
+        .single();
+
+    if (error || !data) return null;
+    return data as CommonNumbers;
+}
+
+export async function saveCommonNumbers(input: Omit<CommonNumbers, 'id'>): Promise<CommonNumbers> {
+    const existing = await getCommonNumbersByDate(input.date);
+
+    if (existing) {
+        const { data: updated, error } = await supabase
+            .from('common_numbers')
+            .update({
+                direct: input.direct,
+                house: input.house,
+                ending: input.ending
+            })
+            .eq('date', input.date)
+            .select()
+            .single();
+
+        if (error) throw error;
+        return updated as CommonNumbers;
+    } else {
+        const { data: inserted, error } = await supabase
+            .from('common_numbers')
+            .insert({
+                date: input.date,
+                direct: input.direct,
+                house: input.house,
+                ending: input.ending
+            })
+            .select()
+            .single();
+
+        if (error) throw error;
+        return inserted as CommonNumbers;
+    }
+}
+
+// ===== Dream Numbers =====
+
+export async function getDreamNumbersByDate(date: string): Promise<DreamNumbersEntry | null> {
+    const { data, error } = await supabase
+        .from('dream_numbers')
+        .select('*')
+        .eq('date', date)
+        .single();
+
+    if (error || !data) return null;
+    return data as DreamNumbersEntry;
+}
+
+export async function saveDreamNumbers(input: Omit<DreamNumbersEntry, 'id'>): Promise<DreamNumbersEntry> {
+    const existing = await getDreamNumbersByDate(input.date);
+
+    if (existing) {
+        const { data: updated, error } = await supabase
+            .from('dream_numbers')
+            .update({ dreams: input.dreams })
+            .eq('date', input.date)
+            .select()
+            .single();
+
+        if (error) throw error;
+        return updated as DreamNumbersEntry;
+    } else {
+        const { data: inserted, error } = await supabase
+            .from('dream_numbers')
+            .insert({
+                date: input.date,
+                dreams: input.dreams
+            })
+            .select()
+            .single();
+
+        if (error) throw error;
+        return inserted as DreamNumbersEntry;
+    }
 }

@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
-import { dreamNumbers } from '@/lib/dreamNumbers';
 
-export default function DreamNumbersList() {
+interface DreamNumbersListProps {
+    dreams: { dream: string; numbers: string }[];
+}
+
+export default function DreamNumbersList({ dreams }: DreamNumbersListProps) {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filteredDreams = dreamNumbers.filter((item) =>
+    const filteredDreams = dreams.filter((item) =>
         item.dream.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
@@ -45,7 +48,7 @@ export default function DreamNumbersList() {
                         ) : (
                             <tr>
                                 <td colSpan={2} className="p-8 text-center text-gray-500 font-bold text-lg">
-                                    No dreams found matching "{searchTerm}"
+                                    No dreams found matching &quot;{searchTerm}&quot;
                                 </td>
                             </tr>
                         )}

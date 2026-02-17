@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { FAQJsonLd, BreadcrumbJsonLd } from '@/components/JsonLd';
 import DreamNumbersList from '@/components/DreamNumbersList';
 import { Metadata } from 'next';
+import { getDreamNumbersByDate } from '@/lib/storage';
+import { dreamNumbers as defaultDreamNumbers } from '@/lib/dreamNumbers';
 
 export const metadata: Metadata = {
     title: "Teer Dream Numbers - Dream Meaning & Target Numbers | Tripura Teer",
@@ -11,7 +13,22 @@ export const metadata: Metadata = {
     },
 };
 
-export default function DreamNumbersPage() {
+function getTodayIST(): string {
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istDate = new Date(now.getTime() + istOffset + now.getTimezoneOffset() * 60 * 1000);
+    return istDate.toISOString().split('T')[0];
+}
+
+export default async function DreamNumbersPage() {
+    const todayIST = getTodayIST();
+    const todayDreams = await getDreamNumbersByDate(todayIST);
+
+    // Use today's Supabase data if available, otherwise fallback to defaults
+    const dreams = (todayDreams && todayDreams.dreams.length > 0)
+        ? todayDreams.dreams
+        : defaultDreamNumbers;
+
     const faqs = [
         {
             question: 'What are Teer dream numbers?',
@@ -49,7 +66,7 @@ export default function DreamNumbersPage() {
                     <div className="h-1.5 w-32 bg-gradient-to-r from-[var(--color-saffron)] via-white to-[var(--color-india-green)] rounded-full shadow-sm mt-2"></div>
                 </header>
 
-                <DreamNumbersList />
+                <DreamNumbersList dreams={dreams} />
 
                 <div className="relative z-10 mt-4 flex flex-wrap gap-4 justify-center w-full max-w-2xl">
                     <Link
@@ -69,4 +86,3 @@ export default function DreamNumbersPage() {
         </>
     );
 }
-
