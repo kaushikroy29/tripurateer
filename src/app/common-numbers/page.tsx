@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FAQJsonLd, BreadcrumbJsonLd } from '@/components/JsonLd';
 import { Metadata } from 'next';
+import { getCommonNumbersByDate } from '@/lib/storage';
 
 export const metadata: Metadata = {
     title: "Teer Common Numbers Today - Direct, House, Ending | Tripura Teer",
@@ -12,7 +13,17 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600; // Revalidate every hour
 
-export default function CommonNumbersPage() {
+function getTodayIST(): string {
+    const now = new Date();
+    const istOffset = 5.5 * 60 * 60 * 1000;
+    const istDate = new Date(now.getTime() + istOffset + now.getTimezoneOffset() * 60 * 1000);
+    return istDate.toISOString().split('T')[0];
+}
+
+export default async function CommonNumbersPage() {
+    const todayIST = getTodayIST();
+    const commonNumbers = await getCommonNumbersByDate(todayIST);
+
     const today = new Date().toLocaleDateString('en-IN', {
         weekday: 'long',
         year: 'numeric',
@@ -20,13 +31,6 @@ export default function CommonNumbersPage() {
         day: 'numeric',
         timeZone: 'Asia/Kolkata'
     });
-
-    // Mock data for display
-    const commonNumbers = {
-        direct: "57, 82, 12, 49, 05",
-        house: "5, 8",
-        ending: "2, 7"
-    };
 
     const faqs = [
         {
@@ -72,23 +76,30 @@ export default function CommonNumbersPage() {
                         Disclaimer: These numbers are based on specialized calculations from past results. Success is not guaranteed.
                     </div>
 
-                    <div className="grid gap-6">
-                        <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 p-6 rounded-xl text-center shadow-md">
-                            <h2 className="text-2xl font-black text-[var(--color-navy)] uppercase mb-2 tracking-wide">Direct Numbers</h2>
-                            <p className="text-4xl md:text-5xl font-black text-blue-700 tracking-wider drop-shadow-sm">{commonNumbers.direct}</p>
-                        </div>
+                    {commonNumbers ? (
+                        <div className="grid gap-6">
+                            <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 p-6 rounded-xl text-center shadow-md">
+                                <h2 className="text-2xl font-black text-[var(--color-navy)] uppercase mb-2 tracking-wide">Direct Numbers</h2>
+                                <p className="text-4xl md:text-5xl font-black text-blue-700 tracking-wider drop-shadow-sm">{commonNumbers.direct || '—'}</p>
+                            </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 p-6 rounded-xl text-center shadow-md">
-                                <h2 className="text-xl font-black text-purple-900 uppercase mb-2">House</h2>
-                                <p className="text-4xl font-black text-purple-700">{commonNumbers.house}</p>
-                            </div>
-                            <div className="bg-gradient-to-br from-pink-50 to-pink-100 border border-pink-200 p-6 rounded-xl text-center shadow-md">
-                                <h2 className="text-xl font-black text-pink-900 uppercase mb-2">Ending</h2>
-                                <p className="text-4xl font-black text-pink-700">{commonNumbers.ending}</p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="bg-gradient-to-br from-purple-50 to-purple-100 border border-purple-200 p-6 rounded-xl text-center shadow-md">
+                                    <h2 className="text-xl font-black text-purple-900 uppercase mb-2">House</h2>
+                                    <p className="text-4xl font-black text-purple-700">{commonNumbers.house || '—'}</p>
+                                </div>
+                                <div className="bg-gradient-to-br from-pink-50 to-pink-100 border border-pink-200 p-6 rounded-xl text-center shadow-md">
+                                    <h2 className="text-xl font-black text-pink-900 uppercase mb-2">Ending</h2>
+                                    <p className="text-4xl font-black text-pink-700">{commonNumbers.ending || '—'}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className="text-center py-8">
+                            <p className="text-2xl font-black text-gray-400 uppercase">No Common Numbers Yet</p>
+                            <p className="text-gray-500 mt-2 font-semibold">Today&apos;s common numbers will be updated soon. Please check back later.</p>
+                        </div>
+                    )}
                 </div>
 
                 <div className="relative z-10 mt-4 flex flex-wrap gap-4 justify-center w-full max-w-2xl">
@@ -109,4 +120,3 @@ export default function CommonNumbersPage() {
         </>
     );
 }
-
